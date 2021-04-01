@@ -1,6 +1,7 @@
+import 'package:bytebank/database/dao/contact_dao.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:flutter/material.dart';
-//! CONTINUAR DA AULA 06 CAPITULO 2
+
 class ContactForm extends StatefulWidget {
   @override
   _ContactFormState createState() => _ContactFormState();
@@ -9,6 +10,7 @@ class ContactForm extends StatefulWidget {
 class _ContactFormState extends State<ContactForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _accountController = TextEditingController();
+  final ContactDao dao = new ContactDao();
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +52,9 @@ class _ContactFormState extends State<ContactForm> {
                     final String name = _nameController.text;
                     final int accountNumber =
                         int.tryParse(_accountController.text);
-                    final Contact newContact = Contact(name, accountNumber);
-                    Navigator.pop(context, newContact);
+
+                    final Contact newContact = Contact(0, name, accountNumber);
+                    dao.save(newContact).then((id) => Navigator.pop(context));
                   },
                   child: Text('Create'),
                 ),
