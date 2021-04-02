@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bytebank/models/contact.dart';
 
 class Transaction {
@@ -7,31 +5,23 @@ class Transaction {
   final Contact contact;
 
   Transaction(
-      this.value,
-      this.contact,
-      );
+    this.value,
+    this.contact,
+  );
 
   @override
   String toString() {
     return 'Transaction{value: $value, contact: $contact}';
   }
 
+  Transaction.fromJson(Map<String, dynamic> json)
+      : value = json['value'],
+        contact = Contact.fromJson(json['contact']);
 
-  Map<String, dynamic> toMap() {
-    return {
+  Map<String, dynamic> toJson() =>
+    {
       'value': value,
-      'contact': contact.toMap(),
+      'contact': contact.toJson(),
     };
-  }
 
-  factory Transaction.fromMap(Map<String, dynamic> map) {
-    return Transaction(
-      map['value'],
-      Contact.fromMap(map['contact']),
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Transaction.fromJson(String source) => Transaction.fromMap(json.decode(source));
 }
