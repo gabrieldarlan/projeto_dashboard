@@ -73,7 +73,7 @@ class TransactionFormStateless extends StatelessWidget {
         return _BasicForm();
       }
       if (state is SendingState) {
-        return ProgressWindow();
+        // return ProgressWindow();
       }
       if (state is SentState) {
         //TODO sera?
@@ -151,83 +151,84 @@ class TransactionFormStateless extends StatelessWidget {
 class _BasicForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('New transaction'),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Visibility(
-                visible: _sending,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Progress(message: 'Sending...'),
-                ),
-              ),
-              Text(
-                _contact.name,
-                style: TextStyle(
-                  fontSize: 24.0,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text(
-                  _contact.accountNumber.toString(),
-                  style: TextStyle(
-                    fontSize: 32.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: TextField(
-                  controller: _valueController,
-                  style: TextStyle(fontSize: 24.0),
-                  decoration: InputDecoration(
-                    labelText: 'Value',
-                    border: OutlineInputBorder(),
-                  ),
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: SizedBox(
-                  width: double.maxFinite,
-                  child: RaisedButton(
-                    child: Text('Transfer'),
-                    onPressed: () {
-                      final double value =
-                          double.tryParse(_valueController.text);
-                      final transactionCreated = Transaction(
-                        transactionId,
-                        value,
-                        _contact,
-                      );
-                      showDialog(
-                        context: context,
-                        builder: (contextDialog) {
-                          return TransactionAuthDialog(
-                            onConfirm: (String password) {
-                              _save(transactionCreated, password, context);
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),,
-      ),
-    );
+    return  Text('teste');
+    // Scaffold(
+    //   appBar: AppBar(
+    //     title: Text('New transaction'),
+    //   ),
+    //   body: SingleChildScrollView(
+    //     child: Padding(
+    //       padding: const EdgeInsets.all(16.0),
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: <Widget>[
+    //           Visibility(
+    //             visible: _sending,
+    //             child: Padding(
+    //               padding: const EdgeInsets.all(8.0),
+    //               child: Progress(message: 'Sending...'),
+    //             ),
+    //           ),
+    //           Text(
+    //             _contact.name,
+    //             style: TextStyle(
+    //               fontSize: 24.0,
+    //             ),
+    //           ),
+    //           Padding(
+    //             padding: const EdgeInsets.only(top: 16.0),
+    //             child: Text(
+    //               _contact.accountNumber.toString(),
+    //               style: TextStyle(
+    //                 fontSize: 32.0,
+    //                 fontWeight: FontWeight.bold,
+    //               ),
+    //             ),
+    //           ),
+    //           Padding(
+    //             padding: const EdgeInsets.only(top: 16.0),
+    //             child: TextField(
+    //               controller: _valueController,
+    //               style: TextStyle(fontSize: 24.0),
+    //               decoration: InputDecoration(
+    //                 labelText: 'Value',
+    //                 border: OutlineInputBorder(),
+    //               ),
+    //               keyboardType: TextInputType.numberWithOptions(decimal: true),
+    //             ),
+    //           ),
+    //           Padding(
+    //             padding: const EdgeInsets.only(top: 16.0),
+    //             child: SizedBox(
+    //               width: double.maxFinite,
+    //               child: RaisedButton(
+    //                 child: Text('Transfer'),
+    //                 onPressed: () {
+    //                   final double value =
+    //                       double.tryParse(_valueController.text);
+    //                   final transactionCreated = Transaction(
+    //                     transactionId,
+    //                     value,
+    //                     _contact,
+    //                   );
+    //                   showDialog(
+    //                     context: context,
+    //                     builder: (contextDialog) {
+    //                       return TransactionAuthDialog(
+    //                         onConfirm: (String password) {
+    //                           _save(transactionCreated, password, context);
+    //                         },
+    //                       );
+    //                     },
+    //                   );
+    //                 },
+    //               ),
+    //             ),
+    //           )
+    //         ],
+    //       ),
+    //     ),,
+    //   ),
+    // );
   }
 }
