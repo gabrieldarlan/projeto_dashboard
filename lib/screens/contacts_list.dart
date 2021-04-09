@@ -103,6 +103,7 @@ class ContactsList extends StatelessWidget {
 
   FloatingActionButton buildAddContactButton(BuildContext context) {
     return FloatingActionButton(
+      backgroundColor: Theme.of(context).primaryColor,
       onPressed: () async {
         await Navigator.of(context).push(
           MaterialPageRoute(
